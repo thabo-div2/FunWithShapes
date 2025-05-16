@@ -29,6 +29,8 @@ namespace FunWithShapes
 
         private SelectedShape _currentShape;
 
+        private readonly Random random = new Random();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -69,17 +71,22 @@ namespace FunWithShapes
         {
             Shape shapeToRender = null;
 
+            // Generate two random colors
+            Color color1 = Color.FromRgb((byte)random.Next(256), (byte)random.Next(256), (byte)random.Next(256));
+            Color color2 = Color.FromRgb((byte)random.Next(256), (byte)random.Next(256), (byte)random.Next(256));
+            Color color3 = Color.FromRgb((byte)random.Next(256), (byte)random.Next(256), (byte)random.Next(256));
+
             switch (_currentShape) 
             {
                 case SelectedShape.Circle:
                     shapeToRender = new Ellipse() { Height = 30, Width = 30 };
                     RadialGradientBrush brush = new RadialGradientBrush();
                     brush.GradientStops.Add(new GradientStop(
-                        (Color)ColorConverter.ConvertFromString("#FF00B952"), 0));
+                        color1, 0));
                     brush.GradientStops.Add(new GradientStop(
-                        (Color)ColorConverter.ConvertFromString("#FF9A1010"), 1));
+                        color2, 1));
                     brush.GradientStops.Add(new GradientStop(
-                        (Color)ColorConverter.ConvertFromString("#FFE3C815"), 0.5));
+                        color3, 0.5));
                     shapeToRender.Fill = brush;
                     break;
                 case SelectedShape.Rectangle:
